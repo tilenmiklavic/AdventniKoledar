@@ -24,6 +24,7 @@
 		"svelte": "^3.46.0",
 		"svelte-check": "^2.7.1",
 		"typescript": "^4.7.4",
+		"@sveltejs/adapter-vercel": "next",
 		"vite": "^3.1.0"
 	},
 	"type": "module",
