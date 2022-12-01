@@ -1,0 +1,311 @@
+@import '@fontsource/fira-mono';
+
+:root {
+	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	--font-mono: 'Fira Mono', monospace;
+	--color-bg-0: rgb(202, 216, 228);
+	--color-bg-1: hsl(209, 36%, 86%);
+	--color-bg-2: hsl(224, 44%, 95%);
+	--color-theme-1: #ff3e00;
+	--color-theme-2: #40b3ff;
+	--color-text: rgba(0, 0, 0, 0.7);
+	--column-width: 42rem;
+	--column-margin-top: 4rem;
+	font-family: var(--font-body);
+	color: var(--color-text);
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	background-attachment: fixed;
+	background-color: var(--color-bg-1);
+	background-size: 100vw 100vh;
+	background-image: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0.75) 0%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
+}
+
+h1,
+h2,
+p {
+	font-weight: 400;
+}
+
+p {
+	line-height: 1.5;
+}
+
+a {
+	color: var(--color-theme-1);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 2rem;
+	text-align: center;
+	margin-top: 3rem;
+}
+
+h2 {
+	font-size: 1rem;
+}
+
+pre {
+	font-size: 16px;
+	font-family: var(--font-mono);
+	background-color: rgba(255, 255, 255, 0.45);
+	border-radius: 3px;
+	box-shadow: 2px 2px 6px rgb(255 255 255 / 25%);
+	padding: 0.5em;
+	overflow-x: auto;
+	color: var(--color-text);
+}
+
+.text-column {
+	display: flex;
+	max-width: 48rem;
+	flex: 0.6;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+input,
+button {
+	font-size: inherit;
+	font-family: inherit;
+}
+
+button:focus:not(:focus-visible) {
+	outline: none;
+}
+
+@media (min-width: 720px) {
+	h1 {
+		font-size: 2.4rem;
+	}
+}
+
+/* Card CSS */
+:root {
+    --red: hsl(0, 78%, 62%);
+    --cyan: hsl(180, 62%, 55%);
+    --orange: hsl(34, 97%, 64%);
+    --blue: hsl(212, 86%, 64%);
+    --varyDarkBlue: hsl(234, 12%, 34%);
+    --grayishBlue: hsl(229, 6%, 66%);
+    --veryLightGray: hsl(0, 0%, 98%);
+    --weight1: 200;
+    --weight2: 400;
+    --weight3: 600;
+}
+
+h1:first-of-type {
+    font-weight: var(--weight1);
+    color: var(--varyDarkBlue);
+}
+
+h1:last-of-type {
+    color: var(--varyDarkBlue);
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+.box p {
+    color: var(--grayishBlue);
+	font-size: small;
+}
+
+.box {
+    border-radius: 5px;
+    box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+    padding: 30px;
+    margin: 20px;  
+}
+
+/* img {
+    float: right;
+} */
+
+@media (max-width: 450px) {
+    .box {
+        height: 200px;
+		width: 100%;
+    }
+}
+
+@media (max-width: 950px) and (min-width: 450px) {
+    .box {
+        text-align: center;
+        height: 180px;
+    }
+}
+
+.cyan {
+    border-top: 3px solid var(--cyan);
+}
+.red {
+    border-top: 3px solid var(--red);
+}
+.blue {
+    border-top: 3px solid var(--blue);
+}
+.orange {
+    border-top: 3px solid var(--orange);
+}
+
+h2 {
+    color: var(--varyDarkBlue);
+    font-weight: var(--weight3);
+}
+
+
+@media (min-width: 950px) {
+    .row1-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .row2-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .box-down {
+        position: relative;
+        top: 150px;
+    }
+    .box {
+        width: 29%;
+     
+    }
+    .header p {
+        width: 30%;
+    } 
+} 
+
+/* Flip card CSS */
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+	background-color: transparent;
+	/* height: 200px; */
+	/* border: 1px solid #f1f1f1; */
+	perspective: 1000px; /* Remove this if you don't want the 3D effect */
+	/* box-shadow: 0px 30px 40px -20px var(--grayishBlue); */
+	/* padding: 30px; */
+    /* margin: 20px;  */
+	/* margin-top: 2rem; */
+	/* border-radius: 5px;  */
+	/* display: inline-block; */
+	/* height: 10rem; */
+  }
+
+@media (max-width: 450px) {
+    .flip-card {
+        height: 12rem;
+		width: 100%;
+		margin: 1rem 0rem;
+    }
+
+	.flip-card-inner {
+		height: 12rem;
+	}
+
+	.flip-card-front {
+		height: 12rem;
+	}
+
+	.flip-card-back {
+		height: 12rem;
+	}
+}
+
+@media (max-width: 950px) and (min-width: 450px) {
+    .flip-card {
+        height: 12rem;
+		width: 100%;
+    }
+}
+
+@media (min-width: 950px) {
+    .flip-card {
+        height: 14rem;
+		width: 29%;
+		margin: 2rem 1rem;
+    }
+
+	.flip-card-inner {
+		height: 14rem;
+	}
+
+	.flip-card-front {
+		height: 14rem;
+	}
+
+	.flip-card-back {
+		height: 14rem;
+	}
+}
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+	position: relative;
+	width: 100%;
+	/* height: 100%; */
+	text-align: center;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+	box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+	border-radius: 5px;
+	/* display: inline-block; */
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+	transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+	position: absolute;
+	width: 100%;
+	/* height: 100%; */
+	-webkit-backface-visibility: hidden; /* Safari */
+	backface-visibility: hidden;
+	padding: 20px;
+	/* border-radius: 5px; */
+	/* display: inline-block; */
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+	background-color: var(--veryLightGray);
+	color: black;
+	border-radius: 5px;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+	background-color: var(--veryLightGray);
+	/* color: white; */
+	transform: rotateY(180deg);
+	border-radius: 5px;
+  }
+
+  .opis {
+	color: var(--grayishBlue);
+  }
