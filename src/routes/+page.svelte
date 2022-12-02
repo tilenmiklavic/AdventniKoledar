@@ -108,6 +108,7 @@
 							<h2>{index + 1}. naloga</h2>
 							<p class="opis">{el.opis}</p>
 
+							{#if el.slika}
 							<div class="row fixed-bottom">
 								<div class="col">
 									<div class="row">
@@ -121,6 +122,11 @@
 									</div>
 								</div>
 							</div>
+							{:else}
+							<div>
+								<span class="badge bg-success">Brez slikce, samo naloga 😉</span>
+							</div>
+							{/if}
 						</div>
 					</div>
 				</div>
