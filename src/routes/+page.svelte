@@ -7,7 +7,7 @@
 
 	let loading = false;
 	let naloge = [];
-	let fileinput, file, naloga, user;
+	let fileinput, file, naloga, user, todayDate;
 	const options = {
 		duration: 4000,       // duration of progress bar tween to the `next` value
 		initial: 1,           // initial progress bar value
@@ -29,8 +29,12 @@
 
 			if (data) {
 				naloge = data;
-				console.log(naloge);
+				naloge.forEach(el => {
+					el.datum = moment(el.datum, 'YYYY-MM-DD');
+				})
 			}
+
+			console.log(naloge)
 		} catch (error) {
 			console.error(error);
 		}
@@ -75,7 +79,6 @@
 
 	onMount(async () => {
 		user = JSON.parse(localStorage.getItem("user"));
-		console.log(user)
 	});
 
 	getData();
@@ -97,7 +100,7 @@
 	<div class="grid container mt-5 mt-md-0">
 		<div class="row">
 			{#each naloge as el, index}
-				<div class="flip-card">
+				<div class="{(el.datum).isBefore(todayDate) ? 'flip-card-allowed' : ''} flip-card">
 					<div class="flip-card-inner red">
 						<div class="flip-card-front">
 							<h2>{index + 1}. naloga</h2>
