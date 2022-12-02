@@ -87,6 +87,11 @@ pre {
 	margin: 0 auto;
 }
 
+.no-decoration {
+	text-decoration: none;
+	color: #000000;
+}
+
 input,
 button {
 	font-size: inherit;

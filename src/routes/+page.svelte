@@ -2,21 +2,13 @@
 // @ts-nocheck
 	import { supabase } from '../Supabase';
 	import moment from "moment";
-	import { SvelteToast, toast } from '@zerodevx/svelte-toast'
+	import { toast } from '@zerodevx/svelte-toast'
 	import { onMount } from 'svelte';
 
 	let loading = false;
 	let naloge = [];
 	let fileinput, file, naloga, user, todayDate;
-	const options = {
-		duration: 4000,       // duration of progress bar tween to the `next` value
-		initial: 1,           // initial progress bar value
-		next: 0,              // next progress value
-		pausable: false,      // pause progress bar tween on mouse hover
-		dismissable: true,    // allow dismiss with close button
-		reversed: false,      // insert new toast to bottom of stack
-		intro: { x: 256 },    // toast intro fly animation settings
-	}
+
 
 	const getData = async () => {
 		try {
@@ -57,15 +49,15 @@
 
 		let index = naloga.id;
 		let date = moment().format('DD-MM-YYYY:HH-mm-ss');
-		let ime = user.ime.replace('č', 'c').replace('š','s').replace('ž','z');
-		let priimek = user.priimek.replace('č', 'c').replace('š','s').replace('ž','z');
+		let ime = user.name.replace('č', 'c').replace('š','s').replace('ž','z');
+		let priimek = user.surname.replace('č', 'c').replace('š','s').replace('ž','z');
 		const { data, error } = await supabase.storage
 			.from('advetni-koledar-slike')
 			.upload(`public/${index}_${ime}_${priimek}_${date}.jpg`, file)
 
 		if (data) {
 			console.log("Upload successful");
-			toast.push('Success!', {
+			toast.push('Slika naložena!', {
 				theme: {
 					'--toastColor': 'mintcream',
 					'--toastBackground': 'rgba(72,187,120,0.9)',
@@ -100,11 +92,17 @@
 	<div class="grid container mt-5 mt-md-0">
 		<div class="row">
 			{#each naloge as el, index}
-				<div class="{(el.datum).isBefore(todayDate) ? 'flip-card-allowed' : ''} flip-card">
+				<div class="{(el.datum).isAfter(todayDate) ? 'flip-card-disallowed' : 'flip-card-allowed'} flip-card">
 					<div class="flip-card-inner red">
 						<div class="flip-card-front">
 							<h2>{index + 1}. naloga</h2>
 							<p class="opis">{moment(el.datum, 'YYY-MM-DD').format("DD. MM. YYYY")}</p>
+
+							{#if (el.datum).isAfter(todayDate)}
+							<div class="kmalu-container">
+								<span class="badge rounded-pill bg-secondary kmalu-badge">Kmalu...</span>
+							</div>
+							{/if}
 						</div>
 						<div class="flip-card-back">
 							<h2>{index + 1}. naloga</h2>
@@ -112,6 +110,7 @@
 
 							{#if el.slika}
 							<div class="row fixed-bottom">
+								{#if user}
 								<div class="col">
 									<div class="row">
 										<div class="col">
@@ -123,6 +122,11 @@
 										<input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
 									</div>
 								</div>
+								{:else}
+								<div class="col mb-2">
+									<button class="btn btn-warning"><a class="no-decoration" href="/login"><i class="fa fa-sign-in"></i> Prijava</a></button>
+								</div>
+								{/if}
 							</div>
 							{:else}
 							<div>
@@ -135,7 +139,6 @@
 			{/each}
 		</div>
 	</div>
-	<SvelteToast {options} />
 </section>
 
 <style>

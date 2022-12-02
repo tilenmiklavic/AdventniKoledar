@@ -1,16 +1,23 @@
 <script>
     import { onMount } from 'svelte';
+    import { toast } from '@zerodevx/svelte-toast'
 
-    let name = "", surname = "", user, parsedUser;
+    let name = "", surname = "", parsedUser;
 
     let handleOnSubmit = function() {
-        // TODO: remove special characters
         parsedUser = {
             name: name,
             surname: surname
         }
         
         localStorage.setItem('user', JSON.stringify(parsedUser))
+        toast.push('Prijava uspešna!', {
+				theme: {
+					'--toastColor': 'mintcream',
+					'--toastBackground': 'rgba(72,187,120,0.9)',
+					'--toastBarBackground': '#2F855A'
+				}
+			})
     }
 
 	let photos = [];
@@ -40,7 +47,7 @@
     </div>
 
     <div class="mt-4">
-        <form on:submit={handleOnSubmit}>
+        <div>
             <div class="row">
                 <label for="ime">Ime</label>
                 <input type="text" name="ime" bind:value={name} />
@@ -50,8 +57,9 @@
                 <input type="text" name="priimek" bind:value={surname} />
             </div>
             <div class="row mt-1 p-4">
-                <input type="submit" class="btn btn-primary">
+                <!-- <input type="submit" class="btn btn-primary" > -->
+                <button class="btn btn-primary" on:click={handleOnSubmit}>Submit</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
