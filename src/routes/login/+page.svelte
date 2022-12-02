@@ -1,13 +1,29 @@
 <script>
-    let user = {
-        name: "",
-        surname: ""
-    }
+    import { onMount } from 'svelte';
+
+    let name = "", surname = "", user, parsedUser;
 
     let handleOnSubmit = function() {
         // TODO: remove special characters
-        localStorage.setItem('user', JSON.stringify(user))
+        parsedUser = {
+            name: name,
+            surname: surname
+        }
+        
+        localStorage.setItem('user', JSON.stringify(parsedUser))
     }
+
+	let photos = [];
+
+	onMount(async () => {
+		let user = localStorage.getItem("user");
+        let parsedUser = user ? JSON.parse(user) : null;
+
+        if (parsedUser) {
+            name = parsedUser.name;
+            surname = parsedUser.surname;
+        } 
+	});
 </script>
 
 <svelte:head>
@@ -27,11 +43,11 @@
         <form on:submit={handleOnSubmit}>
             <div class="row">
                 <label for="ime">Ime</label>
-                <input type="text" name="ime" bind:value={user.name} />
+                <input type="text" name="ime" bind:value={name} />
             </div>
             <div class="row mt-3">
                 <label for="priimek">Priimek</label>
-                <input type="text" name="priimek" bind:value={user.surname} />
+                <input type="text" name="priimek" bind:value={surname} />
             </div>
             <div class="row mt-1 p-4">
                 <input type="submit" class="btn btn-primary">

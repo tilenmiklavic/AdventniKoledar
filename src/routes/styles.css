@@ -59,6 +59,11 @@ h2 {
 	font-size: 1rem;
 }
 
+h5 {
+	text-align: center;
+	color: rgb(143, 143, 143);
+}
+
 pre {
 	font-size: 16px;
 	font-family: var(--font-mono);
@@ -135,10 +140,6 @@ h1:last-of-type {
     padding: 30px;
     margin: 20px;  
 }
-
-/* img {
-    float: right;
-} */
 
 @media (max-width: 450px) {
     .box {

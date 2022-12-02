@@ -3,10 +3,11 @@
 	import { supabase } from '../Supabase';
 	import moment from "moment";
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast'
+	import { onMount } from 'svelte';
 
 	let loading = false;
 	let naloge = [];
-	let fileinput, file, naloga;
+	let fileinput, file, naloga, user;
 	const options = {
 		duration: 4000,       // duration of progress bar tween to the `next` value
 		initial: 1,           // initial progress bar value
@@ -72,6 +73,11 @@
 		}
 	}
 
+	onMount(async () => {
+		user = JSON.parse(localStorage.getItem("user"));
+		console.log(user)
+	});
+
 	getData();
 </script>
 
@@ -83,9 +89,9 @@
 <section>
 	<span class="welcome">
 		<h1><strong>Adventni koledar</strong></h1>
-		<!-- {#if user}
-		<h3>Živjo {user.ime} {user.priimek} 👋</h3>
-		{/if} -->
+		{#if user}
+		<h5>Živjo {user.name} {user.surname} 👋</h5>
+		{/if}
 	</span>
 
 	<div class="grid container">
