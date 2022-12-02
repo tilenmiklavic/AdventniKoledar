@@ -4,6 +4,7 @@
 	import moment from "moment";
 	import { toast } from '@zerodevx/svelte-toast'
 	import { onMount } from 'svelte';
+	import { getUser, setUser } from "../services/Storage"
 
 	let loading = false;
 	let naloge = [];
@@ -35,12 +36,11 @@
 	const onFileSelected = (e, el) => {
 		if (e.target.files) {
 			file = e.target.files[0];
-			uploadImage();
+			uploadImage(e);
 		}
 	}
 
-	const uploadImage = async () => {
-		let user = JSON.parse(localStorage.getItem("user"));
+	const uploadImage = async (e) => {
 		if (!user) {
 			// user is not logged in 
 			toast.push('Najprej se moraš prijaviti!');
@@ -64,13 +64,23 @@
 					'--toastBarBackground': '#2F855A'
 				}
 			})
+
+			checkTask()
 		} else if (error) {
 			console.error("Upload failed")
 		}
 	}
 
+	const checkTask = function() {
+		user.tasks[naloga.id] = true;
+		setUser(user);
+
+		console.log(naloga)
+	}
+
 	onMount(async () => {
-		user = JSON.parse(localStorage.getItem("user"));
+		user = getUser();
+		console.log(user)
 	});
 
 	getData();
@@ -103,6 +113,10 @@
 								<span class="badge rounded-pill bg-secondary kmalu-badge">Kmalu...</span>
 							</div>
 							{/if}
+
+							{#if user.tasks[el.id]}
+								<i class="fa fa-check"></i>
+							{/if}
 						</div>
 						<div class="flip-card-back">
 							<h2>{index + 1}. naloga</h2>
@@ -110,15 +124,15 @@
 
 							{#if el.slika}
 							<div class="row fixed-bottom">
-								{#if user}
+								{#if user.logged}
 								<div class="col">
 									<div class="row">
 										<div class="col">
-											<img class="upload" src="https://static.thenounproject.com/png/625182-200.png" height="30px" width="30px" alt="" on:click={()=>{fileinput.click(); naloga = el}} />
+											<img class="upload" src="https://static.thenounproject.com/png/625182-200.png" height="30px" width="30px" alt="" on:click={()=>{fileinput.click(); naloga = el;}} />
 										</div>
 									</div>
 									<div class="row">
-										<div class="chan" on:click={()=>{fileinput.click();}}>Nalozi sliko</div>
+										<div class="chan" on:click={()=>{fileinput.click();}}>Naloži sliko</div>
 										<input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
 									</div>
 								</div>

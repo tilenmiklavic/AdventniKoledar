@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { toast } from '@zerodevx/svelte-toast'
+    import { getUser, setUser } from '../../services/Storage'
 
     let name = "", surname = "", parsedUser;
 
@@ -23,13 +24,9 @@
 	let photos = [];
 
 	onMount(async () => {
-		let user = localStorage.getItem("user");
-        let parsedUser = user ? JSON.parse(user) : null;
-
-        if (parsedUser) {
-            name = parsedUser.name;
-            surname = parsedUser.surname;
-        } 
+		let user = getUser();
+        name = user.name;
+        surname = user.surname;
 	});
 </script>
 
@@ -42,7 +39,8 @@
 	<h1><strong>Login</strong></h1>
     <div class="d-flex justify-content-center">
         <div>
-            Za nalaganje slik se prijavi.
+            Za nalaganje slik se prijavi
+            <i class="fa fa-user"></i>
         </div>
     </div>
 
@@ -58,7 +56,7 @@
             </div>
             <div class="row mt-1 p-4">
                 <!-- <input type="submit" class="btn btn-primary" > -->
-                <button class="btn btn-primary" on:click={handleOnSubmit}>Submit</button>
+                <button class="btn btn-primary" on:click={handleOnSubmit}>Submit <i class="fa fa-check"></i></button>
             </div>
         </div>
     </div>
