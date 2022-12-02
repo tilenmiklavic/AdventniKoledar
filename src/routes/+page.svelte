@@ -94,15 +94,14 @@
 		{/if}
 	</span>
 
-	<div class="grid container">
+	<div class="grid container mt-5 mt-md-0">
 		<div class="row">
 			{#each naloge as el, index}
-
 				<div class="flip-card">
 					<div class="flip-card-inner red">
 						<div class="flip-card-front">
 							<h2>{index + 1}. naloga</h2>
-							<p class="opis">{el.datum}</p>
+							<p class="opis">{moment(el.datum, 'YYY-MM-DD').format("DD. MM. YYYY")}</p>
 						</div>
 						<div class="flip-card-back">
 							<h2>{index + 1}. naloga</h2>
